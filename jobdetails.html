@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Details – CareerHatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eef3f8;
+      color: #333;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      font-size: 26px;
+      color: #002c5f;
+      margin: 0;
+    }
+    .back-btn {
+      padding: 8px 14px;
+      background: #ccc;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #222;
+      font-size: 14px;
+    }
+    .details p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    .details strong {
+      color: #002c5f;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      background: #27ae60;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 4px;
+    }
+    .badge.not-verified {
+      background: #e74c3c;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+    }
+    .buttons button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .apply-btn {
+  background: #3498db;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.apply-btn:hover {
+  background: #2c80b4;
+}
+    .save-btn {
+      background: #7f8c8d;
+      color: white;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    .modal-content form {
+      display: grid;
+      gap: 10px;
+    }
+    .modal-content input,
+    .modal-content textarea {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .modal-content .submit {
+      background: #2980b9;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 22px;
+      color: #000;
+      cursor: pointer;
+    }
+    :root {
+  --blue: #1c8dff;
+  --navy: #003b73;
+  --white: #fff;
+  --gray: #f4f8fc;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  --radius: 12px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+nav a {
+  margin-left: 24px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--navy);
+  transition: 0.3s;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.05);
+  border-color: var(--blue);
+}
+
+  </style>
+</head>
+<body>
+    <header>
+        <h1>CareerHatch</h1>
+        <nav>
+          <a href="Landing.html">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#plans">Plans</a>
+          <a href="#community">Community</a>
+          <a href="/Jobseeking/Profile/Profile.html" class="profile-icon">
+            <img src="https://via.placeholder.com/40" alt="Profile" />
+          </a>
+        </nav>
+      </header>
+      
+  <div class="container">
+    <div class="header">
+      <h1 id="job-title">Loading...</h1>
+      <a href="Job-huntingpage.html" class="back-btn">&larr; Back to Listings</a>
+    </div>
+    <div class="details">
+      <p><strong>Company:</strong> <span id="company-name">Loading...</span></p>
+      <p><strong>Salary:</strong> <span id="job-salary">Loading...</span></p>
+      <p><strong>Location:</strong> <span id="job-location">Loading...</span></p>
+      <p><strong>Verification:</strong> <span id="verification-badge" class="badge">Loading...</span></p>
+      <p><strong>Description:</strong><br><span id="job-description">Loading...</span></p>
+      <p><strong>Qualifications:</strong><br><span id="job-qualifications">Loading...</span></p>
+      <p><strong>Responsibilities:</strong><br><span id="job-responsibilities">Loading...</span></p>
+    </div>
+    <div class="buttons">
+        <a href="EmployeeDashboard.html" class="apply-btn">Apply Now</a>
+        <button class="save-btn" onclick="alert('Saved!')">Save</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="applyModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Apply for Job</h2>
+      <form>
+        <input type="text" placeholder="Your Full Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="file" required>
+        <textarea placeholder="Your Cover Letter"></textarea>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+   // ========== Job Filtering Script ==========
+const buttons = document.querySelectorAll(".filter-btn");
+const jobCards = document.querySelectorAll(".job-card");
+
+function filterJobs(category) {
+  jobCards.forEach(card => {
+    const show = category === "all" || card.classList.contains(category);
+    card.style.display = show ? "block" : "none";
+  });
+}
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    buttons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    filterJobs(button.dataset.category);
+  });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  filterJobs("all");
+});
+
+
+// ========== Job Details Page Script ==========
+// Use this section on `job-details.html` page
+const jobs = [
+  {
+    id: 1,
+    title: 'Junior Web Developer',
+    company: 'Accenture PH',
+    salary: '₱25,000',
+    location: 'Don Gil Garcia St., Brgy. Capitol Site, Cebu City',
+    verified: true,
+    description: 'Build and maintain company websites using modern stacks.',
+    qualifications: 'Bachelor’s degree in IT or related field.',
+    responsibilities: 'Develop responsive websites and manage front-end logic.'
+  },
+  {
+    id: 2,
+    title: 'Deck Cadet',
+    company: 'OSM Maritime',
+    salary: '₱30,000',
+    location: 'Pier 3, Brgy. Tinago, North Reclamation, Cebu City',
+    verified: true,
+    description: 'Assist in deck operations on board ships. Local port-based training.',
+    qualifications: 'Completed Basic Safety Training. Must be physically fit.',
+    responsibilities: 'Assist deck officers, follow safety protocols on board.'
+  },
+  {
+    id: 3,
+    title: 'Staff Nurse',
+    company: 'Chong Hua Hospital',
+    salary: '₱24,000',
+    location: 'Fuente Circle, Brgy. Capitol Site, Cebu City',
+    verified: true,
+    description: 'Provide medical care and patient documentation.',
+    qualifications: 'Licensed nurse, graduate of BS Nursing.',
+    responsibilities: 'Monitor patient vitals, administer medication, assist doctors.'
+  },
+  {
+    id: 4,
+    title: 'Junior Accountant',
+    company: 'KPMG',
+    salary: '₱20,000',
+    location: 'Paseo de Roxas, Brgy. Bel-Air, Makati City',
+    verified: true,
+    description: 'Support monthly reporting and bookkeeping for clients.',
+    qualifications: 'Graduate of BS Accountancy. CPA is a plus.',
+    responsibilities: 'Prepare ledgers, reconcile accounts, support audits.'
+  },
+  {
+    id: 5,
+    title: 'Front Desk Officer',
+    company: 'Radisson Blu Hotel',
+    salary: '₱18,000',
+    location: 'Brgy. Mabolo, Cebu City – near SM City',
+    verified: true,
+    description: 'Welcome guests, manage bookings, and assist guests with needs.',
+    qualifications: 'Graduate of HRM or Hospitality courses. Good communication skills.',
+    responsibilities: 'Check-in/out guests, handle concerns, answer phone inquiries.'
+  },
+  {
+    id: 6,
+    title: 'Graphic Designer',
+    company: 'Canva PH',
+    salary: '₱22,000',
+    location: 'Remote / BGC, Brgy. Fort Bonifacio, Taguig City',
+    verified: true,
+    description: 'Create digital assets for social media, ads, and branding.',
+    qualifications: 'Bachelor\'s in Graphic Design. Experience with Adobe Suite.',
+    responsibilities: 'Create graphics, collaborate with content and marketing team.'
+  }
+];
+
+function getJobById(id) {
+  return jobs.find(job => job.id === id);
+}
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return parseInt(urlParams.get(param));
+}
+
+function loadJobDetails() {
+  const jobId = getQueryParam('id');
+  const job = getJobById(jobId);
+
+  if (job) {
+    document.getElementById('job-title').textContent = job.title;
+    document.getElementById('company-name').textContent = job.company;
+    document.getElementById('job-salary').textContent = job.salary;
+    document.getElementById('job-location').textContent = job.location;
+    document.getElementById('job-description').textContent = job.description;
+    document.getElementById('job-qualifications').textContent = job.qualifications;
+    document.getElementById('job-responsibilities').textContent = job.responsibilities;
+
+    const badge = document.getElementById('verification-badge');
+    badge.textContent = job.verified ? 'Verified' : 'Not Verified';
+    badge.className = 'badge' + (job.verified ? '' : ' not-verified');
+  } else {
+    document.querySelector('.container').innerHTML = "<p style='text-align:center;'>Job not found.</p>";
+  }
+}
+
+// ========== Modal Functions ==========
+function openModal() {
+  document.getElementById('applyModal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('applyModal').style.display = 'none';
+}
+
+// ========== Load Job Details on job-details.html ==========
+if (document.getElementById('job-title')) {
+  window.addEventListener("DOMContentLoaded", loadJobDetails);
+}
+
+  </script>
+</body>
+</html>

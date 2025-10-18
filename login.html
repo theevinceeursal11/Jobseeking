@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerHatch – Login</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --accent: #ff6f61;
+      --bg: #f0f4f8;
+      --white: #ffffff;
+      --text: #333;
+      --radius: 10px;
+      --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    .container {
+      background: var(--white);
+      padding: 40px 30px;
+      max-width: 400px;
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .container h1 {
+      font-size: 26px;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .container p {
+      text-align: center;
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #222;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 6px rgba(26, 115, 232, 0.2);
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      top: -110%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 12px;
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #e65a50;
+    }
+
+    .note {
+      font-size: 13px;
+      text-align: center;
+      margin-top: 18px;
+      color: #555;
+    }
+
+    .note a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 20px;
+        padding: 25px;
+      }
+
+      .container h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Login to CareerHatch</h1>
+    <p>Safe, Verified Jobs. Built for You.</p>
+
+    <form action="/Jobseeking/employee/Landing.html" method="POST">
+      <div class="form-group">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" name="username" placeholder="e.g. johndoe@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="form-group">
+        <label for="id-upload">
+          Upload Valid ID 
+          <span class="tooltip">(?)
+            <span class="tooltip-text">Required for account verification. Accepts PDF, JPG, PNG.</span>
+          </span>
+        </label>
+        <input type="file" id="id-upload" name="id-upload" accept=".pdf,.jpg,.png" required>
+      </div>
+
+      <button type="submit">Login</button>
+
+      <div class="note">
+        Don't have an account? <a href="/Jobseeking/Login/Sign-up.html">Sign up here</a>
+      </div>
+
+      <div class="note" style="margin-top: 8px;">
+        ID verification may take up to 48 hours. <a href="#">Learn more</a>
+      </div>
+    </form>
+
+    <footer>
+      &copy; 2025 CareerHatch. All rights reserved.
+    </footer>
+    <script>
+        document.querySelector("form").addEventListener("submit", function (e) {
+          e.preventDefault(); // Stop form from submitting normally
+      
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+      
+          // Employee login
+          if (username === "user1" && password === "user1") {
+            window.location.href = "/Jobseeking/employee/Landing.html";
+          }
+          // Employer login
+          else if (username === "employeer1" && password === "employeer2") {
+            window.location.href = "/Jobseeking/Employeer/EmployerDashboard.html";
+          }
+          // Invalid login
+          else {
+            alert("Invalid username or password.");
+          }
+        });
+      </script>
+      
+  </div>
+</body>
+</html>

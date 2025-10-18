@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9fafb;
+            color: #333;
+        }
+        .dashboard {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: #1a202c;
+        }
+        .notification-bell {
+            font-size: 22px;
+            cursor: pointer;
+            position: relative;
+        }
+        .notification-bell .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e53e3e;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #718096;
+            margin-right: 10px;
+        }
+        .tab.active {
+            color: #1a202c;
+            border-bottom: 2px solid #3182ce;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+        .activity-list, .interview-list {
+            list-style: none;
+            padding: 0;
+        }
+        .activity-item, .interview-item {
+            padding: 12px;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .activity-item:hover, .interview-item:hover {
+            background: #f7fafc;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #fff;
+        }
+        .status.pending { background: #d69e2e; }
+        .status.interviewed { background: #38a169; }
+        .status.scheduled { background: #3182ce; }
+        .status.hired { background: #2b6cb0; }
+        .schedule-btn {
+            padding: 4px 8px;
+            background: #3182ce;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .schedule-btn:hover {
+            background: #2b6cb0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1a202c;
+        }
+        .modal-content p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        .modal-content .close-btn {
+            background: #718096;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        .modal-content .close-btn:hover {
+            background: #5a667a;
+        }
+        .modal-content .doc-note {
+            font-style: italic;
+            color: #e53e3e;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .dashboard {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab {
+                margin: 5px 0;
+            }
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Employee Dashboard</h1>
+            <div class="notification-bell" onclick="toggleNotifications()">
+                🔔<span class="badge" id="notification-count">2</span>
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('activities')">Applied Activities</div>
+            <div class="tab" onclick="showTab('interviews')">Interviews</div>
+        </div>
+        <div id="activities-content" class="content active">
+            <ul class="activity-list">
+                <li class="activity-item" onclick="showDetails('Juan Dela Cruz', 'Maritime Job', 'pending')">
+                    <span>Juan Dela Cruz - Maritime Job</span>
+                    <span class="status pending">Pending</span>
+                </li>
+                <li class="activity-item" onclick="showDetails('Maria Santos', 'Healthcare Job', 'hired')">
+                    <span>Maria Santos - Healthcare Job</span>
+                    <span class="status hired">Hired</span>
+                </li>
+            </ul>
+        </div>
+        <div id="interviews-content" class="content">
+            <ul class="interview-list">
+                <li class="interview-item" onclick="showDetails('Sofia Lim', 'Maritime Interview', 'scheduled')">
+                    <span>Sofia Lim - Maritime Interview</span>
+                    <span class="status scheduled">Scheduled: 2025-06-18 10:00</span>
+                    <button class="schedule-btn" onclick="event.stopPropagation(); scheduleInterview()">Reschedule</button>
+                </li>
+                <li class="interview-item" onclick="showDetails('Mark Torres', 'Healthcare Interview', 'pending')">
+                    <span>Mark Torres - Healthcare Interview</span>
+                    <span class="status pending">Pending</span>
+                    <button class="schedule-btn" onclick="event.stopPropagation(); scheduleInterview()">Schedule</button>
+                </li>
+            </ul>
+        </div>
+        <div class="modal" id="details-modal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal()">Close</button>
+                <h2 id="modal-title"></h2>
+                <p><strong>Position:</strong> <span id="modal-position"></span></p>
+                <p><strong>Address:</strong> <span id="modal-address"></span></p>
+                <p><strong>Verification:</strong> <span id="modal-verification"></span></p>
+                <p><strong>Salary:</strong> <span id="modal-salary"></span></p>
+                <p><strong>Job Description:</strong> <span id="modal-description"></span></p>
+                <p><strong>Meeting Platform:</strong> <span id="modal-meeting"></span></p>
+                <p><strong>Posted:</strong> <span id="modal-posted"></span></p>
+                <p><strong>Applied:</strong> <span id="modal-applied"></span></p>
+                <p><strong>Approved:</strong> <span id="modal-approved"></span></p>
+                <p id="modal-doc-note" class="doc-note" style="display: none;">Please submit to the office the following documents: ID, resume, and contract.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mock data for demo
+        const employeeData = {
+            'Juan Dela Cruz': {
+                position: 'Maritime Engineer',
+                address: '123 Ocean St, Manila',
+                verification: 'Not Verified',
+                salary: '$50,000/year',
+                description: 'Responsible for maintaining ship engines and navigation systems.',
+                meeting: 'Google Meet',
+                posted: '2025-06-01',
+                applied: '2025-06-05',
+                approved: 'N/A',
+                status: 'pending'
+            },
+            'Maria Santos': {
+                position: 'Nurse',
+                address: '456 Health Ave, Quezon City',
+                verification: 'Verified ✓',
+                salary: '$40,000/year',
+                description: 'Provides patient care in a hospital setting.',
+                meeting: 'Zoom',
+                posted: '2025-05-20',
+                applied: '2025-05-25',
+                approved: '2025-06-10 14:30',
+                status: 'hired'
+            },
+            'Sofia Lim': {
+                position: 'Maritime Coordinator',
+                address: '789 Port Rd, Cebu',
+                verification: 'Verified ✓',
+                salary: '$45,000/year',
+                description: 'Coordinates maritime logistics and crew schedules.',
+                meeting: 'Google Meet',
+                posted: '2025-06-02',
+                applied: '2025-06-07',
+                approved: '2025-06-15 09:00',
+                status: 'scheduled'
+            },
+            'Mark Torres': {
+                position: 'Healthcare Assistant',
+                address: '321 Care St, Davao',
+                verification: 'Not Verified',
+                salary: '$35,000/year',
+                description: 'Assists nurses and doctors in patient care.',
+                meeting: 'Zoom',
+                posted: '2025-06-03',
+                applied: '2025-06-08',
+                approved: 'N/A',
+                status: 'pending'
+            }
+        };
+
+        function showTab(tabId) {
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId + '-content').classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        function toggleNotifications() {
+            alert('New Notifications: 2 new applications and 1 interview scheduled!');
+            document.getElementById('notification-count').textContent = '0';
+        }
+
+        function scheduleInterview() {
+            const date = prompt('Enter new date and time (e.g., 2025-06-18 10:00):');
+            if (date) {
+                alert(`Interview scheduled for ${date}`);
+            }
+        }
+
+        function showDetails(name, job, status) {
+            const data = employeeData[name];
+            document.getElementById('modal-title').textContent = `${name} - ${job}`;
+            document.getElementById('modal-position').textContent = data.position;
+            document.getElementById('modal-address').textContent = data.address;
+            document.getElementById('modal-verification').textContent = data.verification;
+            document.getElementById('modal-salary').textContent = data.salary;
+            document.getElementById('modal-description').textContent = data.description;
+            document.getElementById('modal-meeting').textContent = data.meeting;
+            document.getElementById('modal-posted').textContent = data.posted;
+            document.getElementById('modal-applied').textContent = data.applied;
+            document.getElementById('modal-approved').textContent = data.approved;
+            document.getElementById('modal-doc-note').style.display = data.status === 'hired' ? 'block' : 'none';
+            document.getElementById('details-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('details-modal').style.display = 'none';
+        }
+
+        // Mock notification trigger
+        setTimeout(() => {
+            document.getElementById('notification-count').textContent = '3';
+        }, 5000);
+    </script>
+</body>
+</html>

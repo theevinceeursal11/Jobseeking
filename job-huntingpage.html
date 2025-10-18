@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerHatch – Job Categories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --blue: #1c8dff;
+      --navy: #003b73;
+      --white: #fff;
+      --gray: #f4f8fc;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      --radius: 12px;
+      --sky: #1c8dff;
+      --sea: #0072ff;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--gray);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    nav a {
+      margin-left: 24px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--navy);
+  transition: 0.3s;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.05);
+  border-color: var(--blue);
+}
+
+
+    h1.page-title {
+      text-align: center;
+      color: var(--navy);
+      margin: 30px 0;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .category-buttons button {
+      background: var(--white);
+      border: 1px solid var(--blue);
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--blue);
+      transition: 0.2s;
+    }
+
+    .category-buttons button.active,
+    .category-buttons button:hover {
+      background-color: var(--blue);
+      color: var(--white);
+    }
+
+    .job-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .job-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .job-card {
+      background-color: var(--white);
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+      cursor: pointer;
+      display: none;
+    }
+
+    .job-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .job-card h4 {
+      color: var(--navy);
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .job-card p {
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .verified {
+      font-size: 12px;
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CareerHatch</h1>
+    <nav>
+      <a href="Landing.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#plans">Plans</a>
+      <a href="#community">Community</a>
+      <a href="EmployeeDashboard.html" class="profile-icon">
+        <img src="/Jobseeking/Profile/MEw.jpg" alt="Profile" />
+      </a>
+          </nav>
+  </header>
+
+  <h1 class="page-title">Browse Jobs by Category</h1>
+
+  <div class="category-buttons">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="it">IT</button>
+    <button class="filter-btn" data-category="seaman">Seaman</button>
+    <button class="filter-btn" data-category="medical">Medical</button>
+    <button class="filter-btn" data-category="accounting">Accounting</button>
+    <button class="filter-btn" data-category="hrm">HRM</button>
+    <button class="filter-btn" data-category="design">Design</button>
+  </div>
+
+  <div class="job-grid">
+    <!-- IT -->
+    <a href="JobDetails.html?id=1" class="job-link">
+      <div class="job-card it">
+        <h4>Accenture PH</h4>
+        <p><strong>Job:</strong> Junior Web Developer</p>
+        <p><strong>Salary:</strong> ₱25,000</p>
+        <p><strong>Location:</strong> Don Gil Garcia St., Brgy. Capitol Site, Cebu City</p>
+        <p>Build and maintain company websites using modern stacks.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+
+    <!-- Seaman -->
+    <a href="JobDetails.html?id=2" class="job-link">
+      <div class="job-card seaman">
+        <h4>OSM Maritime</h4>
+        <p><strong>Job:</strong> Deck Cadet</p>
+        <p><strong>Salary:</strong> ₱30,000</p>
+        <p><strong>Location:</strong> Pier 3, Brgy. Tinago, North Reclamation, Cebu City</p>
+        <p>Assist in deck operations on board ships. Local port-based training.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+
+    <!-- Medical -->
+    <a href="JobDetails.html?id=3" class="job-link">
+      <div class="job-card medical">
+        <h4>Chong Hua Hospital</h4>
+        <p><strong>Job:</strong> Staff Nurse</p>
+        <p><strong>Salary:</strong> ₱24,000</p>
+        <p><strong>Location:</strong> Fuente Circle, Brgy. Capitol Site, Cebu City</p>
+        <p>Provide medical care and patient documentation.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+
+    <!-- Accounting -->
+    <a href="JobDetails.html?id=4" class="job-link">
+      <div class="job-card accounting">
+        <h4>KPMG</h4>
+        <p><strong>Job:</strong> Junior Accountant</p>
+        <p><strong>Salary:</strong> ₱20,000</p>
+        <p><strong>Location:</strong> Paseo de Roxas, Brgy. Bel-Air, Makati City</p>
+        <p>Support monthly reporting and bookkeeping for clients.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+
+    <!-- HRM -->
+    <a href="JobDetails.html?id=5" class="job-link">
+      <div class="job-card hrm">
+        <h4>Radisson Blu Hotel</h4>
+        <p><strong>Job:</strong> Front Desk Officer</p>
+        <p><strong>Salary:</strong> ₱18,000</p>
+        <p><strong>Location:</strong> Brgy. Mabolo, Cebu City – near SM City</p>
+        <p>Welcome guests, manage bookings, and assist guests with needs.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+
+    <!-- Design -->
+    <a href="JobDetails.html?id=6" class="job-link">
+      <div class="job-card design">
+        <h4>Canva PH</h4>
+        <p><strong>Job:</strong> Graphic Designer</p>
+        <p><strong>Salary:</strong> ₱22,000</p>
+        <p><strong>Location:</strong> Remote / BGC, Brgy. Fort Bonifacio, Taguig City</p>
+        <p>Create digital assets for social media, ads, and branding.</p>
+        <p class="verified">Verified: June 19</p>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".filter-btn");
+    const jobCards = document.querySelectorAll(".job-card");
+
+    function filterJobs(category) {
+      jobCards.forEach(card => {
+        card.style.display = (category === "all" || card.classList.contains(category)) ? "block" : "none";
+      });
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        filterJobs(button.dataset.category);
+      });
+    });
+
+    // Show all jobs by default
+    filterJobs("all");
+  </script>
+
+</body>
+</html>
