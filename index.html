@@ -5,7 +5,8 @@
   <title>CareerHatch – Your Path Starts Here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
+ <style>
+    /* Root colors and variables */
     :root {
       --blue: #1c8dff;
       --navy: #003b73;
@@ -34,14 +35,15 @@
       text-decoration: none;
     }
 
+    /* Header */
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
+      padding: 16px 20px;
       background: var(--white);
       box-shadow: var(--shadow);
     }
@@ -61,8 +63,44 @@
     nav a {
       font-weight: 600;
       color: var(--navy);
+      font-size: 15px;
+      transition: color 0.3s;
     }
 
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background-color: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Dropdown */
     .dropdown {
       position: relative;
     }
@@ -75,6 +113,7 @@
       border: 2px solid var(--navy);
       cursor: pointer;
       transition: 0.3s;
+      min-width: 40px;
     }
 
     .profile-icon:hover {
@@ -83,22 +122,21 @@
     }
 
     .dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 110%;
-  background-color: var(--white);
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  z-index: 99;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 110%;
+      background-color: var(--white);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
 
-.dropdown-menu.show {
-  display: block;
-}
-
+    .dropdown-menu.show {
+      display: block;
+    }
 
     .dropdown-menu a {
       display: block;
@@ -106,36 +144,36 @@
       color: var(--navy);
       font-size: 14px;
       font-weight: 500;
+      transition: background-color 0.3s;
     }
 
     .dropdown-menu a:hover {
       background-color: var(--gray);
     }
 
-    .dropdown:hover .dropdown-menu {
-      display: block;
-    }
-
+    /* Hero Section */
     .hero {
       position: relative;
-      padding: 110px 20px 90px;
+      padding: 80px 20px 70px;
       text-align: center;
       background: radial-gradient(circle at top right, rgba(28,141,255,0.1), transparent 60%),
                   radial-gradient(circle at bottom left, rgba(0,59,115,0.1), transparent 70%),
                   var(--white);
+      overflow: hidden;
     }
 
     .hero h2 {
-      font-size: 42px;
+      font-size: clamp(28px, 8vw, 42px);
       font-weight: 800;
       color: var(--navy);
       margin-bottom: 12px;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: clamp(16px, 4vw, 18px);
       color: #444;
       margin-bottom: 32px;
+      line-height: 1.6;
     }
 
     .blob {
@@ -151,14 +189,26 @@
       transform: rotate(35deg);
     }
 
+    /* CTA Buttons */
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
     .cta-buttons a {
       display: inline-block;
-      margin: 10px 16px;
       padding: 14px 32px;
       border-radius: var(--radius);
       font-weight: 700;
       transition: 0.25s all;
       border: 2px solid transparent;
+      font-size: 15px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .signup {
@@ -173,47 +223,54 @@
     }
 
     .cta-buttons a:hover {
-      transform: translateY(-3px) rotateX(6deg);
+      transform: translateY(-3px);
       box-shadow: 0 12px 18px rgba(0, 0, 0, 0.15);
     }
 
+    /* Section Titles */
     .section-title {
       text-align: center;
-      font-size: 28px;
+      font-size: clamp(24px, 6vw, 28px);
       font-weight: 800;
       color: var(--navy);
-      margin: 90px 0 30px;
+      margin: 60px 20px 30px;
     }
 
+    /* Features Section */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 40px;
-      max-width: 1100px;
-      margin: 0 auto 120px;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto 80px;
       padding: 0 20px;
     }
 
     .feature-box {
       background: var(--white);
-      padding: 38px 28px;
+      padding: 28px 20px;
       border-radius: var(--radius);
       text-align: center;
       box-shadow: var(--shadow);
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .feature-box:hover {
       transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     }
 
     .feature-box img {
-      width: 58px;
-      margin-bottom: 18px;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
     }
 
     .feature-box h4 {
-      font-size: 20px;
+      font-size: clamp(16px, 4vw, 20px);
       font-weight: 700;
       color: #002a56;
       margin-bottom: 8px;
@@ -222,6 +279,14 @@
     .feature-box p {
       font-size: 14px;
       color: #555;
+      line-height: 1.6;
+    }
+
+    .feature-box ul {
+      text-align: left;
+      padding-left: 20px;
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     footer {
@@ -230,25 +295,53 @@
       text-align: center;
       padding: 32px 20px;
       font-size: 14px;
+      line-height: 1.8;
     }
 
+    /* Tablet */
     @media (max-width: 768px) {
-      .hero {
-        padding: 80px 16px 70px;
-      }
+      :root { --blue: #297bff; }
 
-      .hero h2 {
-        font-size: 30px;
-      }
+      header { padding: 12px 16px; }
+      header h1 { font-size: 20px; }
+      nav { display: none; flex-direction: column; position: fixed; top: 60px; left: 0; width: 100%; background: var(--white); box-shadow: var(--shadow); z-index: 999; padding: 20px; gap: 12px; }
+      nav.active { display: flex; }
+      nav a { width: 100%; padding: 12px 0; border-bottom: 1px solid var(--gray); font-size: 13px; }
+      .hamburger { display: flex; }
+
+      .dropdown-menu { position: absolute; top: 50px; right: 20px; z-index: 1000; background: var(--white); box-shadow: var(--shadow); }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      :root { --blue: #3490ff; }
+
+      header { padding: 10px 12px; }
+      header h1 { font-size: 18px; }
+      .hero { padding: 60px 16px 50px; }
+      .blob { display: none; }
+      .hero h2 { font-size: 24px; margin-bottom: 12px; }
+      .hero p { font-size: 14px; margin-bottom: 24px; }
+      .cta-buttons { flex-direction: column; gap: 12px; }
+      .cta-buttons a { width: 100%; padding: 12px 16px; font-size: 14px; }
+      .section-title { font-size: 22px; margin: 40px 16px 20px; }
+      .features { padding: 0 16px; gap: 16px; margin-bottom: 50px; }
+      .feature-box { padding: 20px 16px; }
+      .feature-box img { width: 40px; }
+      .feature-box h4 { font-size: 16px; }
+      .feature-box p { font-size: 13px; }
+      .feature-box ul { font-size: 13px; }
+      footer { padding: 24px 16px; font-size: 12px; }
     }
   </style>
+
 </head>
 <body>
 
   <!-- Header -->
   <header>
     <h1>CareerHatch</h1>
-    <nav>
+    <nav id="nav-menu">
       <a href="index.html">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -261,8 +354,12 @@
           <a href="hero.html">Logout</a>
         </div>
       </div>
-    </div>
     </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
   <!-- Hero Section -->
@@ -362,22 +459,56 @@
     &copy; 2025 CareerHatch – Safe Jobs. Real Support. Built for You.
   </footer>
   <script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
     const profileIcon = document.querySelector('.profile-icon');
     const dropdownMenu = document.querySelector('.dropdown-menu');
-  
+
+    // Hamburger menu toggle
+    hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    const navLinks = document.querySelectorAll('#nav-menu > a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Profile dropdown toggle
     profileIcon.addEventListener('click', function (e) {
       e.stopPropagation();
       dropdownMenu.classList.toggle('show');
     });
-  
+
+    // Close menus when clicking outside
     document.addEventListener('click', function () {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
       dropdownMenu.classList.remove('show');
+    });
+
+    // Close dropdown when a menu item is clicked
+    dropdownMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function () {
+        dropdownMenu.classList.remove('show');
+      });
+    });
+
+    // Prevent dropdown from closing when clicking on dropdown items
+    dropdownMenu.addEventListener('click', function (e) {
+      e.stopPropagation();
     });
   </script>
   
 </body>
 </html>
-
 
 
 
