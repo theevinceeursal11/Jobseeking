@@ -20,17 +20,131 @@
       border-radius: 12px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
-    .header {
+     /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      padding: 16px 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
     }
-    .header h1 {
-      font-size: 26px;
-      color: #002c5f;
-      margin: 0;
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
     }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav a {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background-color: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .profile-wrapper {
+  position: relative;
+  margin-left: 24px;
+}
+
+.profile-icon {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--navy);
+  transition: 0.3s;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.05);
+  border-color: var(--blue);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+  background: var(--gray);
+}
+
     .back-btn {
       padding: 8px 14px;
       background: #ccc;
@@ -190,18 +304,29 @@ nav a {
 </head>
 <body>
     <header>
-        <h1>CareerHatch</h1>
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#plans">Plans</a>
-          <a href="community.html">Community</a>
-          <a href="/Jobseeking/Profile/Profile.html" class="profile-icon">
-            <img src="https://via.placeholder.com/40" alt="Profile" />
-          </a>
-        </nav>
-      </header>
+  <h1>CareerHatch</h1>
+
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Services.html">Services</a>
+    <a href="community.html">Community</a>
+
+    <!-- Profile Wrapper -->
+    <div class="profile-wrapper">
+      <a href="employeedashboard.html" class="profile-icon" id="profileToggle">
+        <img src="/Profile/MEw.jpg" alt="Profile" />
+      </a>
+
+      <!-- Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="employeedashboard.html">Profile Settings</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="hero.html">Logout</a>
+      </div>
+    </div>
+  </nav>
+</header>
       
   <div class="container">
     <div class="header">
@@ -218,7 +343,7 @@ nav a {
       <p><strong>Responsibilities:</strong><br><span id="job-responsibilities">Loading...</span></p>
     </div>
     <div class="buttons">
-        <a href="employeedashboard.html" class="apply-btn">Apply Now</a>
+        <a href="Dashboard.html" class="apply-btn">Apply Now</a>
         <button class="save-btn" onclick="alert('Saved!')">Save</button>
     </div>
   </div>
@@ -376,7 +501,20 @@ function closeModal() {
 if (document.getElementById('job-title')) {
   window.addEventListener("DOMContentLoaded", loadJobDetails);
 }
+const profileIcon = document.querySelector(".profile-icon");
+  const dropdown = document.querySelector(".profile-dropdown");
 
+  profileIcon.addEventListener("click", (e) => {
+    e.preventDefault(); // stops instant redirect
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!profileIcon.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
   </script>
 </body>
 </html>
