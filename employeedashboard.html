@@ -1,285 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Dashboard</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f9fafb;
-      color: #333;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Settings - CareerHatch</title>
+<style>
+  :root {
+    --primary: #1c8dff;
+    --secondary: #003b73;
+    --bg: #eef3f8;
+    --card-bg: #fff;
+    --shadow: rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: #333;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 16px var(--shadow);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #3182ce;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .back-link:hover {
+    color: #2b6cb0;
+  }
+
+  h1 {
+    color: var(--secondary);
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: grid;
+    gap: 25px;
+  }
+
+  .card {
+    background: #f7f9fc;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+
+  .card h2 {
+    margin-top: 0;
+    color: var(--secondary);
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .profile-pic-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .profile-pic-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+  }
+
+  .save-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .save-btn:hover {
+    background: #0f70d0;
+  }
+
+  @media (max-width: 768px) {
+    .profile-pic-container {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .dashboard {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-      padding: 20px;
+    .profile-pic-container img {
+      margin-bottom: 10px;
     }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 16px;
-      color: #3182ce;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .back-link:hover {
-      color: #2b6cb0;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .header h1 {
-      font-size: 22px;
-      color: #1a202c;
-    }
-
-    .notification-bell {
-      font-size: 22px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .notification-bell .badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #e53e3e;
-      color: #fff;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 10px;
-    }
-
-    .tabs {
-      display: flex;
-      border-bottom: 1px solid #e2e8f0;
-      margin-bottom: 20px;
-    }
-
-    .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      color: #718096;
-      margin-right: 10px;
-    }
-
-    .tab.active {
-      color: #1a202c;
-      border-bottom: 2px solid #3182ce;
-    }
-
-    .content {
-      display: none;
-    }
-
-    .content.active {
-      display: block;
-    }
-
-    .activity-list, .interview-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .activity-item, .interview-item {
-      padding: 12px;
-      border-bottom: 1px solid #edf2f7;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .activity-item:hover, .interview-item:hover {
-      background: #f7fafc;
-    }
-
-    .status {
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      color: #fff;
-    }
-
-    .status.pending { background: #d69e2e; }
-    .status.hired { background: #2b6cb0; }
-    .status.scheduled { background: #3182ce; }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-content h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #1a202c;
-    }
-
-    .modal-content p {
-      margin: 8px 0;
-      font-size: 14px;
-      color: #4a5568;
-    }
-
-    .modal-content .close-btn {
-      background: #718096;
-      color: #fff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      float: right;
-    }
-
-    .modal-content .doc-note {
-      font-style: italic;
-      color: #e53e3e;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .tabs {
-        flex-direction: column;
-      }
-
-      .tab {
-        margin: 5px 0;
-      }
-
-      .modal-content {
-        width: 95%;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-<div class="dashboard">
+<div class="container">
   <a href="job-huntingpage.html" class="back-link">← Back</a>
+  <h1>Profile Settings</h1>
+  <form id="profile-form">
 
-  <div class="header">
-    <h1>Employee Dashboard</h1>
-    <div class="notification-bell" onclick="toggleNotifications()">
-      🔔<span class="badge" id="notification-count">2</span>
+    <!-- Profile Picture & Basic Info -->
+    <div class="card">
+      <h2>Basic Information</h2>
+      <div class="profile-pic-container">
+        <img src="https://via.placeholder.com/100" alt="Profile Picture" id="profile-preview">
+        <div>
+          <label for="profile-pic">Upload Profile Picture</label>
+          <input type="file" id="profile-pic" accept="image/*">
+        </div>
+      </div>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" placeholder="Juan Dela Cruz" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="juan@example.com" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+63 912 345 6789">
     </div>
-  </div>
 
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('activities')">Applied</div>
-    <div class="tab" onclick="showTab('interviews')">Interviews</div>
-  </div>
+    <!-- Address & Location -->
+    <div class="card">
+      <h2>Address & Location</h2>
+      <label for="street">Street</label>
+      <input type="text" id="street" placeholder="Don Gil Garcia St.">
 
-  <div id="activities-content" class="content active">
-    <ul class="activity-list">
-      <li class="activity-item" onclick="showDetails('Juan Dela Cruz')">
-        <span>Juan Dela Cruz - IT</span>
-        <span class="status pending">Pending</span>
-      </li>
-    </ul>
-  </div>
+      <label for="city">City</label>
+      <input type="text" id="city" placeholder="Cebu City">
 
-  <div id="interviews-content" class="content">
-    <ul class="interview-list">
-      <li class="interview-item" onclick="showDetails('Sofia Lim')">
-        <span>Sofia Lim - Maritime</span>
-        <span class="status scheduled">2025-06-21</span>
-      </li>
-    </ul>
-  </div>
-</div>
+      <label for="province">Province</label>
+      <input type="text" id="province" placeholder="Cebu">
 
-<div class="modal" id="details-modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">Close</button>
-    <h2 id="modal-title"></h2>
-    <p><strong>Position:</strong> <span id="modal-position"></span></p>
-    <p><strong>Company:</strong> <span id="modal-company"></span></p>
-    <p><strong>Address:</strong> <span id="modal-address"></span></p>
-    <p><strong>Schedule:</strong> <span id="modal-schedule"></span></p>
-    <p><strong>Meeting Type:</strong> <span id="modal-meeting"></span></p>
-    <p><strong>Note:</strong> <span id="modal-note"></span></p>
-  </div>
+      <label for="country">Country</label>
+      <input type="text" id="country" placeholder="Philippines">
+    </div>
+
+    <!-- Professional Details -->
+    <div class="card">
+      <h2>Professional Details</h2>
+      <label for="position">Current Position / Job Title</label>
+      <input type="text" id="position" placeholder="Junior Web Developer">
+
+      <label for="skills">Skills (comma separated)</label>
+      <input type="text" id="skills" placeholder="HTML, CSS, JavaScript">
+
+      <label for="experience">Experience</label>
+      <textarea id="experience" placeholder="Describe your experience..."></textarea>
+
+      <label for="education">Education</label>
+      <input type="text" id="education" placeholder="Bachelor of Science in Computer Science">
+    </div>
+
+    <!-- Resume & Documents -->
+    <div class="card">
+      <h2>Resume & Documents</h2>
+      <label for="resume">Upload Resume / CV</label>
+      <input type="file" id="resume" accept=".pdf,.doc,.docx">
+
+      <label for="certificates">Upload Certificates (optional)</label>
+      <input type="file" id="certificates" accept=".pdf,.jpg,.png" multiple>
+    </div>
+
+    <!-- Save Button -->
+    <button type="submit" class="save-btn">Save Profile</button>
+
+  </form>
 </div>
 
 <script>
-  const employeeData = {
-    "Juan Dela Cruz": {
-      position: "Junior Web Developer",
-      company: "Accenture",
-      address: "Don Gil Garcia St., Cebu City",
-      schedule: "Pending Approval",
-      meeting: "N/A",
-      note: "Wait for HR contact via email."
-    },
-    "Sofia Lim": {
-      position: "Deck Cadet",
-      company: "OSM Maritime",
-      address: "Pier 3, Cebu City",
-      schedule: "2025-06-21 10:00 AM",
-      meeting: "Face-to-Face",
-      note: "Bring valid ID. Dress appropriately."
+  // Preview profile picture
+  const profileInput = document.getElementById('profile-pic');
+  const profilePreview = document.getElementById('profile-preview');
+
+  profileInput.addEventListener('change', function(){
+    const file = this.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = function(e){
+        profilePreview.setAttribute('src', e.target.result);
+      }
+      reader.readAsDataURL(file);
     }
-  };
+  });
 
-  function showTab(tabId) {
-    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
-    document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
-    document.getElementById(`${tabId}-content`).classList.add('active');
-  }
-
-  function toggleNotifications() {
-    alert("You have 2 new notifications.");
-    document.getElementById('notification-count').textContent = '0';
-  }
-
-  function showDetails(name) {
-    const data = employeeData[name];
-    document.getElementById('modal-title').textContent = `${name} - ${data.position}`;
-    document.getElementById('modal-position').textContent = data.position;
-    document.getElementById('modal-company').textContent = data.company;
-    document.getElementById('modal-address').textContent = data.address;
-    document.getElementById('modal-schedule').textContent = data.schedule;
-    document.getElementById('modal-meeting').textContent = data.meeting;
-    document.getElementById('modal-note').textContent = data.note;
-    document.getElementById('details-modal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('details-modal').style.display = 'none';
-  }
+  // Handle form submission
+  document.getElementById('profile-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('Profile saved successfully!');
+    // Here you can add code to save form data to backend
+  });
 </script>
 
 </body>
