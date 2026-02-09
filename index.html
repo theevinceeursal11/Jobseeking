@@ -333,6 +333,110 @@
       .feature-box ul { font-size: 13px; }
       footer { padding: 24px 16px; font-size: 12px; }
     }
+    .about {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.about-content {
+  flex: 1;
+}
+
+.about-content h4 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.about-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 12px;
+}
+.cta-section {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  text-align: center;
+  padding: 70px 20px;
+  margin-top: 80px;
+}
+
+.cta-section h3 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 28px;
+  opacity: 0.9;
+}
+.faqs {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.faq-item h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.faq-item p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+.testimonials {
+  max-width: 1100px;
+  margin: 50px auto 80px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.testimonial-box {
+  background: #fff;
+  padding: 26px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+}
+
+.testimonial-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 14px;
+}
+
+.testimonial-box h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+
   </style>
 
 </head>
@@ -413,46 +517,83 @@
     </div>
   </section>
 
-  <!-- Plans Section -->
-  <h3 class="section-title" id="plans">Choose a Plan</h3>
-  <section class="features">
-    <div class="feature-box">
-      <h4>Free Plan</h4>
-      <p><strong>₱0</strong> / lifetime</p>
-      <ul style="text-align: left; padding-left: 20px; font-size: 14px;">
-        <li>Up to 3 resume builds</li>
-        <li>Basic job access</li>
-        <li>Community access</li>
-      </ul>
-    </div>
-    <div class="feature-box">
-      <h4>Standard</h4>
-      <p><strong>₱99</strong> / month</p>
-      <ul style="text-align: left; padding-left: 20px; font-size: 14px;">
-        <li>Unlimited resume builder</li>
-        <li>Email support</li>
-        <li>1 user per account</li>
-      </ul>
-    </div>
-    <div class="feature-box">
-      <h4>Pro</h4>
-      <p><strong>₱199</strong> / month</p>
-      <ul style="text-align: left; padding-left: 20px; font-size: 14px;">
-        <li>All Standard features</li>
-        <li>Resume templates</li>
-        <li>14-day free trial</li>
-      </ul>
-    </div>
-    <div class="feature-box">
-      <h4>Business</h4>
-      <p><strong>Custom</strong></p>
-      <ul style="text-align: left; padding-left: 20px; font-size: 14px;">
-        <li>Bulk resume builder access</li>
-        <li>Admin control panel</li>
-        <li>Partner hiring tools</li>
-      </ul>
-    </div>
-  </section>
+ <!-- About Section -->
+<h3 class="section-title" id="about">About CareerHatch</h3>
+<section class="about">
+  <div class="about-image">
+    <img src="Profile/h18e_g3c3_230125.jpg" alt="About CareerHatch">
+  </div>
+  <div class="about-content">
+    <h4>Built to Protect and Empower Jobseekers</h4>
+    <p>
+      CareerHatch was created to solve one major problem—unsafe and unreliable job hunting.
+      We connect jobseekers with verified employers, remove scams from the process, and
+      provide tools that help people grow their careers with confidence.
+    </p>
+    <p>
+      Whether you're a student, fresh graduate, or professional, CareerHatch gives you
+      a safe place to apply, learn, and connect.
+    </p>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <h3>Ready to Take the Next Step?</h3>
+  <p>Join a trusted platform where careers grow safely and opportunities are real.</p>
+  <div class="cta-buttons">
+    <a href="job-huntingpage.html" class="signup">Get Started</a>
+    <a href="community.html" class="learnmore">Join the Community</a>
+  </div>
+</section>
+<!-- FAQs Section -->
+<h3 class="section-title">Frequently Asked Questions</h3>
+<section class="faqs">
+  <div class="faq-item">
+    <h4>Is CareerHatch free to use?</h4>
+    <p>Yes. You can start with our Free Plan and upgrade anytime if you need more features.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How do you verify employers?</h4>
+    <p>All employers go through manual screening and document checks before posting jobs.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Is this for online or local jobs?</h4>
+    <p>Both. CareerHatch supports online, freelance, and local community-based jobs.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Can students and fresh graduates apply?</h4>
+    <p>Absolutely. CareerHatch is designed to support beginners and career shifters.</p>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<h3 class="section-title">What People Say</h3>
+<section class="testimonials">
+  <div class="testimonial-box">
+    <p>
+      “CareerHatch helped me avoid scams and find a legit remote job. The platform feels safe and easy to use.”
+    </p>
+    <h5>— Mark, Jobseeker</h5>
+  </div>
+
+  <div class="testimonial-box">
+    <p>
+      “As an employer, the verification process gave us confidence that we’re hiring real people.”
+    </p>
+    <h5>— Anna, Small Business Owner</h5>
+  </div>
+
+  <div class="testimonial-box">
+    <p>
+      “The community support and guidance made job hunting less stressful.”
+    </p>
+    <h5>— Carla, Fresh Graduate</h5>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>
