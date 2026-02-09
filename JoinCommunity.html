@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerHatch Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --primary: #1c8dff;
+  --secondary: #003b73;
+  --bg: #eef3f8;
+  --card-bg: #fff;
+  --shadow: rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--card-bg);
+  box-shadow: 0 4px 10px var(--shadow);
+  flex-wrap: wrap;
+  z-index: 50;
+}
+header h1 { font-size: 28px; font-weight: 700; color: var(--secondary); }
+nav#nav-menu { display: flex; gap: 20px; flex-wrap: wrap; }
+nav#nav-menu a { font-weight: 500; color: var(--secondary); padding: 6px 12px; border-radius: 6px; transition: all 0.3s; }
+nav#nav-menu a:hover { background: var(--primary); color: #fff; }
+.dropdown { position: relative; cursor: pointer; }
+.dropdown img.profile-icon { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--secondary); object-fit: cover; transition: 0.3s; }
+.dropdown:hover img { transform: scale(1.05); border-color: var(--primary); }
+.dropdown-menu { display: none; position: absolute; top: 50px; right: 0; background: var(--card-bg); border-radius: var(--radius); box-shadow: 0 4px 14px var(--shadow); flex-direction: column; min-width: 160px; }
+.dropdown-menu a { padding: 12px 16px; color: var(--secondary); font-weight: 500; }
+.dropdown-menu a:hover { background: var(--primary); color: #fff; }
+.dropdown:hover .dropdown-menu { display: flex; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 25px; height: 3px; background: var(--secondary); border-radius: 3px; }
+
+/* Welcome Banner */
+.welcome-banner {
+  max-width: 1200px;
+  margin: 30px auto 20px;
+  background: var(--primary);
+  color: #fff;
+  padding: 25px 20px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 6px 14px var(--shadow);
+}
+.welcome-banner h2 { margin: 0 0 8px; font-size: 26px; }
+.welcome-banner p { margin: 0 0 12px; font-size: 15px; }
+.complete-profile-btn { display: inline-block; background: #fff; color: var(--primary); padding: 10px 18px; border-radius: var(--radius); font-weight: 600; text-decoration: none; transition: 0.3s; }
+.complete-profile-btn:hover { background: #f0f0f0; }
+
+/* Main layout */
+.main { max-width: 1200px; margin: 0 auto 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .main { grid-template-columns: 1fr; } }
+
+/* Quick Start Widget */
+.quick-start {
+  background: var(--card-bg);
+  padding: 18px 16px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px var(--shadow);
+  margin-bottom: 20px;
+}
+.quick-start h3 { color: var(--secondary); margin-bottom: 10px; text-align: center; }
+.quick-start ul { padding-left: 20px; margin: 0; }
+.quick-start ul li { margin-bottom: 6px; font-size: 14px; }
+
+/* Feed */
+.feed { display: flex; flex-direction: column; gap: 15px; }
+.feed-card { background: var(--card-bg); padding: 16px 14px; border-radius: var(--radius); box-shadow: 0 4px 12px var(--shadow); }
+.feed-card .user-info { display: flex; align-items: center; margin-bottom: 6px; }
+.feed-card .user-info img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; margin-right: 8px; }
+.feed-card .user-info strong { color: var(--secondary); }
+.feed-card p { margin: 4px 0; color: #555; font-size: 14px; }
+
+/* Suggested Connections */
+.connections { display: flex; flex-direction: column; gap: 12px; }
+.connection-card { display: flex; align-items: center; background: var(--card-bg); padding: 10px 12px; border-radius: var(--radius); box-shadow: 0 3px 8px var(--shadow); justify-content: space-between; }
+.connection-info { display: flex; align-items: center; gap: 8px; }
+.connection-info img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.connection-info .name { font-weight: 500; color: var(--secondary); font-size: 14px; }
+.connect-btn { background: var(--primary); color: #fff; padding: 5px 10px; border-radius: var(--radius); font-weight: 500; cursor: pointer; border: none; transition: 0.3s; font-size: 13px; }
+.connect-btn:hover { background: #0f70d0; }
+
+/* Categories */
+.categories { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.category-card { background: var(--card-bg); padding: 12px; border-radius: var(--radius); box-shadow: 0 3px 10px var(--shadow); text-align: center; font-weight: 500; color: var(--secondary); cursor: pointer; font-size: 14px; transition: transform 0.3s, box-shadow 0.3s; }
+.category-card:hover { transform: translateY(-2px); box-shadow: 0 6px 15px var(--shadow); }
+
+/* Footer */
+footer { text-align: center; padding: 20px 15px; background: var(--secondary); color: #fff; font-size: 13px; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav#nav-menu { display: none; flex-direction: column; width: 100%; background: var(--card-bg); position: absolute; top: 70px; left: 0; padding: 15px 0; box-shadow: 0 6px 12px var(--shadow); }
+  nav#nav-menu.show { display: flex; }
+  .hamburger { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CareerHatch</h1>
+  <nav id="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="#community">Community</a>
+    <a href="services.html">Services</a>
+    <div class="dropdown">
+      <img src="/Profile/MEw.jpg" alt="Profile" class="profile-icon" />
+      <div class="dropdown-menu">
+        <a href="employeedashboard.html">Profile Settings</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="hero.html">Logout</a>
+      </div>
+    </div>
+  </nav>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- Welcome Banner -->
+<div class="welcome-banner">
+  <h2>Welcome to CareerHatch Community!</h2>
+  <p>Complete your profile to unlock tailored posts, suggestions, and networking opportunities.</p>
+  <a href="#" class="complete-profile-btn">Complete Your Profile</a>
+</div>
+
+<div class="main">
+  <!-- Left Column: Feed -->
+  <div class="feed">
+    <div class="feed-card">
+      <div class="user-info">
+        <img src="/Profile/user1.jpg" alt="User">
+        <strong>Jane D.</strong> • 2h ago
+      </div>
+      <p>Looking for resume tips for tech roles. Any advice?</p>
+    </div>
+    <div class="feed-card">
+      <div class="user-info">
+        <img src="/Profile/user2.jpg" alt="User">
+        <strong>Mark R.</strong> • 5h ago
+      </div>
+      <p>Excited to start my first remote job! Any onboarding tips?</p>
+    </div>
+  </div>
+
+  <!-- Right Column: Quick Start & Connections -->
+  <div>
+    <!-- Quick Start -->
+    <div class="quick-start">
+      <h3>Quick Start</h3>
+      <ul>
+        <li>Complete your profile for personalized suggestions.</li>
+        <li>Join groups that match your career interests.</li>
+        <li>Introduce yourself in the “New Members” thread.</li>
+        <li>Explore discussions and ask questions.</li>
+      </ul>
+    </div>
+
+    <!-- Suggested Connections -->
+    <div class="connections">
+      <h3 style="text-align:center;color:var(--secondary);margin-bottom:8px;">Suggested Connections</h3>
+      <div class="connection-card">
+        <div class="connection-info">
+          <img src="/Profile/user3.jpg" alt="User">
+          <span class="name">Alex P.</span>
+        </div>
+        <button class="connect-btn">Connect</button>
+      </div>
+      <div class="connection-card">
+        <div class="connection-info">
+          <img src="/Profile/user4.jpg" alt="User">
+          <span class="name">Maria G.</span>
+        </div>
+        <button class="connect-btn">Connect</button>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+      <div class="category-card">Career Advice</div>
+      <div class="category-card">Job Opportunities</div>
+      <div class="category-card">Skill Development</div>
+      <div class="category-card">Mentorship & Networking</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 CareerHatch – Safe Jobs. Real Support. Built for You.
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+hamburger.addEventListener('click', () => { navMenu.classList.toggle('show'); });
+
+    // Show all jobs by default
+    filterJobs("all");
+    const profileIcon = document.querySelector(".profile-icon");
+  const dropdown = document.querySelector(".profile-dropdown");
+
+  profileIcon.addEventListener("click", (e) => {
+    e.preventDefault(); // stops instant redirect
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!profileIcon.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+</script>
+
+</body>
+</html>
