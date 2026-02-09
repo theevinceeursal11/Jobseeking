@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services - CareerHatch</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1c8dff;
+    --secondary: #003b73;
+    --bg: #eef3f8;
+    --card-bg: #fff;
+    --shadow: rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: var(--card-bg);
+    box-shadow: 0 4px 10px var(--shadow);
+    z-index: 50;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--secondary);
+  }
+  nav#nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  nav#nav-menu a {
+    font-weight: 500;
+    color: var(--secondary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  nav#nav-menu a:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* Dropdown profile */
+  .dropdown {
+    position: relative;
+    cursor: pointer;
+  }
+  .dropdown img.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+    object-fit: cover;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .dropdown:hover img {
+    transform: scale(1.05);
+    border-color: var(--primary);
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px var(--shadow);
+    flex-direction: column;
+    min-width: 160px;
+  }
+  .dropdown-menu a {
+    padding: 12px 16px;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .dropdown-menu a:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+  .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--secondary);
+    border-radius: 3px;
+  }
+
+  /* Services Section */
+  .section-card {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    border-radius: var(--radius);
+  }
+  .section-card h2 {
+    font-size: 32px;
+    color: var(--secondary);
+    margin-bottom: 30px;
+    position: relative;
+    text-align: center;
+  }
+  .section-card h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+  }
+  .service-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 6px 18px var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--shadow);
+  }
+  .service-card i {
+    font-size: 36px;
+    color: var(--primary);
+    margin-bottom: 15px;
+  }
+  .service-card h3 {
+    margin-bottom: 12px;
+    color: var(--secondary);
+    font-size: 20px;
+  }
+  .service-card p {
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  /* FAQ Section */
+  .faq-card {
+    margin-top: 50px;
+    background: #f4f8fc;
+    padding: 30px;
+    border-radius: var(--radius);
+  }
+  .faq-card h3 {
+    margin-bottom: 20px;
+    color: var(--secondary);
+    text-align: center;
+  }
+  .faq-card p {
+    margin: 10px 0;
+    font-size: 15px;
+  }
+  .faq-card p strong {
+    color: var(--primary);
+  }
+
+  /* CTA Button */
+  .apply-btn {
+    display: block;
+    margin: 30px auto 0;
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .apply-btn:hover {
+    background: #0f70d0;
+    transform: translateY(-3px);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 25px 15px;
+    background: var(--secondary);
+    color: #fff;
+    font-size: 14px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav#nav-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: var(--card-bg);
+      position: absolute;
+      top: 70px;
+      left: 0;
+      padding: 20px 0;
+      box-shadow: 0 6px 14px var(--shadow);
+    }
+    nav#nav-menu.show {
+      display: flex;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .service-card {
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <h1>CareerHatch</h1>
+  <nav id="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="#services">Services</a>
+    <a href="community.html">Community</a>
+    <div class="dropdown">
+      <img src="/Profile/MEw.jpg" alt="Profile" class="profile-icon" />
+      <div class="dropdown-menu">
+        <a href="employeedashboard.html">Profile Settings</a>
+        <a href="hero.html">Logout</a>
+      </div>
+    </div>
+  </nav>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- Services Section -->
+<div class="section-card" id="services">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <i class="fas fa-briefcase"></i>
+      <h3>Job Matching</h3>
+      <p>We connect candidates with positions that match their skills, experience, and goals.</p>
+      <p>Our goal is to reduce job search stress and help professionals find meaningful roles faster.</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-user-graduate"></i>
+      <h3>Career Guidance</h3>
+      <p>Personalized advice, resume help, and interview preparation to guide your career growth.</p>
+      <p>We empower users to make informed decisions and confidently advance their professional journey.</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-building"></i>
+      <h3>Company Recruitment</h3>
+      <p>Businesses find pre-screened candidates efficiently, saving time and resources.</p>
+      <p>Our goal is to create a secure, smooth hiring process connecting companies with the right talent.</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <h3>Workshops & Training</h3>
+      <p>Skill-building webinars, workshops, and training programs for career advancement.</p>
+      <p>We equip users with knowledge and confidence, improving employability and professional growth.</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-users"></i>
+      <h3>Community & Networking</h3>
+      <p>Connect with professionals, share experiences, and support each other in career growth.</p>
+      <p>We foster a community for collaboration, learning, and long-term professional relationships.</p>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq-card">
+    <h3>Frequently Asked Questions</h3>
+    <p><strong>Q1:</strong> How do I create a profile?</p>
+    <p><strong>A1:</strong> Sign up using your email or social account, fill your profile, and start exploring jobs.</p>
+
+    <p><strong>Q2:</strong> Are the job postings verified?</p>
+    <p><strong>A2:</strong> Yes, all job listings are checked for legitimacy to ensure safety.</p>
+
+    <p><strong>Q3:</strong> Is CareerHatch free for job seekers?</p>
+    <p><strong>A3:</strong> Absolutely, job seekers can use the platform for free.</p>
+
+    <p><strong>Q4:</strong> How quickly can I be matched to jobs?</p>
+    <p><strong>A4:</strong> Usually within 24–48 hours depending on your profile and available openings.</p>
+  </div>
+
+  <a href="contact.html" class="apply-btn">Contact Us</a>
+</div>
+
+<footer>
+  &copy; 2025 CareerHatch – Safe Jobs. Real Support. Built for You.
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+});
+</script>
+
+</body>
+</html>
