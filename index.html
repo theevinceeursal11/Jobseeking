@@ -105,51 +105,60 @@
       position: relative;
     }
 
-    .profile-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--navy);
-      cursor: pointer;
-      transition: 0.3s;
-      min-width: 40px;
-    }
+    .profile-wrapper {
+  position: relative;
+  margin-left: 24px;
+}
 
-    .profile-icon:hover {
-      transform: scale(1.05);
-      border-color: var(--blue);
-    }
+.profile-icon {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
 
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 110%;
-      background-color: var(--white);
-      min-width: 200px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      z-index: 999;
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--navy);
+  transition: 0.3s;
+}
 
-    .dropdown-menu.show {
-      display: block;
-    }
+.profile-icon img:hover {
+  transform: scale(1.05);
+  border-color: var(--blue);
+}
 
-    .dropdown-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: var(--navy);
-      font-size: 14px;
-      font-weight: 500;
-      transition: background-color 0.3s;
-    }
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+}
 
-    .dropdown-menu a:hover {
-      background-color: var(--gray);
-    }
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+  background: var(--gray);
+}
 
     /* Hero Section */
     .hero {
@@ -450,14 +459,18 @@
       <a href="AboutUs.html">About</a>
       <a href="#services">Services</a>
       <a href="community.html">Community</a>
-      <div class="dropdown">
-        <img src="/Jobseeking/Profile/MEw.jpg" alt="Profile" />
-        <div class="dropdown-menu">
-          <a href="Dashboard.html">Dashboard</a>
-          <a href="employeedashboard.html">Profile Settings</a>
-          <a href="hero.html">Logout</a>
-        </div>
+         <div class="profile-wrapper">
+      <a href="employeedashboard.html" class="profile-icon" id="profileToggle">
+        <img src="/Profile/MEw.jpg" alt="Profile" />
+      </a>
+
+      <!-- Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="employeedashboard.html">Profile Settings</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="hero.html">Logout</a>
       </div>
+    </div>
     </nav>
     <div class="hamburger" id="hamburger">
       <span></span>
@@ -603,7 +616,6 @@
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
-    const profileIcon = document.querySelector('.profile-icon');
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
     // Hamburger menu toggle
@@ -614,43 +626,24 @@
     });
 
     // Close menu when a link is clicked
-    const navLinks = document.querySelectorAll('#nav-menu > a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function () {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
-    });
+  const profileIcon = document.querySelector(".profile-icon");
+  const dropdown = document.querySelector(".profile-dropdown");
 
-    // Profile dropdown toggle
-    profileIcon.addEventListener('click', function (e) {
-      e.stopPropagation();
-      dropdownMenu.classList.toggle('show');
-    });
+  profileIcon.addEventListener("click", (e) => {
+    e.preventDefault(); // stops instant redirect
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
+  });
 
-    // Close menus when clicking outside
-    document.addEventListener('click', function () {
-      hamburger.classList.remove('active');
-      navMenu.classList.remove('active');
-      dropdownMenu.classList.remove('show');
-    });
-
-    // Close dropdown when a menu item is clicked
-    dropdownMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function () {
-        dropdownMenu.classList.remove('show');
-      });
-    });
-
-    // Prevent dropdown from closing when clicking on dropdown items
-    dropdownMenu.addEventListener('click', function (e) {
-      e.stopPropagation();
-    });
+  document.addEventListener("click", (e) => {
+    if (!profileIcon.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
   </script>
   
 </body>
 </html>
-
 
 
 
