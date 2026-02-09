@@ -5,56 +5,85 @@
   <title>CareerHatch – Job Categories</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root {
-      --blue: #1c8dff;
-      --navy: #003b73;
-      --white: #fff;
-      --gray: #f4f8fc;
-      --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-      --radius: 12px;
-      --sky: #1c8dff;
-      --sea: #0072ff;
-    }
+   :root {
+  --blue: #1c8dff;
+  --navy: #003b73;
+  --white: #ffffff;
+  --gray: #f4f8fc;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  --radius: 12px;
+  --sky: #1c8dff;
+  --sea: #0072ff;
+}
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--gray);
-      margin: 0;
-      padding: 0;
-    }
+/* =====================
+   GLOBAL RESET
+===================== */
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: var(--white);
-      box-shadow: var(--shadow);
-    }
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--gray);
+  color: #333;
+}
 
-    header h1 {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--navy);
-      margin: 0;
-    }
+/* =====================
+   HEADER & NAVIGATION
+===================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
 
-    nav a {
-      margin-left: 24px;
-      font-weight: 600;
-      color: var(--navy);
-      text-decoration: none;
-      transition: 0.2s;
-    }
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+}
 
-    nav a:hover {
-      color: var(--blue);
-    }
+nav {
+  display: flex;
+  align-items: center;
+}
 
-    .profile-icon img {
+nav a {
+  margin-left: 24px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--blue);
+}
+
+/* =====================
+   PROFILE ICON & DROPDOWN
+===================== */
+.profile-wrapper {
+  position: relative;
+  margin-left: 24px;
+}
+
+.profile-icon {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-icon img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -68,99 +97,189 @@
   border-color: var(--blue);
 }
 
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+}
 
-    h1.page-title {
-      text-align: center;
-      color: var(--navy);
-      margin: 30px 0;
-    }
+.profile-dropdown.show {
+  display: flex;
+}
 
-    .category-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
-    }
+.profile-dropdown a {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
 
-    .category-buttons button {
-      background: var(--white);
-      border: 1px solid var(--blue);
-      padding: 10px 18px;
-      border-radius: var(--radius);
-      cursor: pointer;
-      font-weight: bold;
-      color: var(--blue);
-      transition: 0.2s;
-    }
+.profile-dropdown a:hover {
+  background: var(--gray);
+}
 
-    .category-buttons button.active,
-    .category-buttons button:hover {
-      background-color: var(--blue);
-      color: var(--white);
-    }
+/* =====================
+   PAGE TITLES
+===================== */
+.page-title {
+  text-align: center;
+  font-size: 26px;
+  color: var(--navy);
+  margin: 30px 0 20px;
+}
 
-    .job-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
-    }
+/* =====================
+   CATEGORY BUTTONS
+===================== */
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
 
-    .job-link {
-      text-decoration: none;
-      color: inherit;
-    }
+.category-buttons button {
+  background: var(--white);
+  border: 1px solid var(--blue);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue);
+  transition: 0.2s ease;
+}
 
-    .job-card {
-      background-color: var(--white);
-      padding: 20px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-      cursor: pointer;
-      display: none;
-    }
+.category-buttons button:hover,
+.category-buttons button.active {
+  background: var(--blue);
+  color: var(--white);
+}
 
-    .job-card:hover {
-      transform: translateY(-4px);
-    }
+/* =====================
+   JOB GRID
+===================== */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
 
-    .job-card h4 {
-      color: var(--navy);
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
+.job-link {
+  text-decoration: none;
+  color: inherit;
+}
 
-    .job-card p {
-      font-size: 14px;
-      margin: 4px 0;
-    }
+/* =====================
+   JOB CARD
+===================== */
+.job-card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+  cursor: pointer;
+  display: block;
+}
 
-    .verified {
-      font-size: 12px;
-      color: #666;
-      font-style: italic;
-    }
+.job-card:hover {
+  transform: translateY(-4px);
+}
+
+.job-card h4 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.job-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.verified {
+  font-size: 12px;
+  color: #777;
+  font-style: italic;
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  color: #555;
+}
+
+/* =====================
+   RESPONSIVE (MOBILE)
+===================== */
+@media (max-width: 768px) {
+  header {
+    padding: 16px 20px;
+  }
+
+  nav a {
+    margin-left: 14px;
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+}
+
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>CareerHatch</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#plans">Plans</a>
-      <a href="community.html">Community</a>
-      <a href="employeedashboard.html" class="profile-icon">
-        <img src="/Jobseeking/Profile/MEw.jpg" alt="Profile" />
+<header>
+  <h1>CareerHatch</h1>
+
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Services.html">Services</a>
+    <a href="community.html">Community</a>
+
+    <!-- Profile Wrapper -->
+    <div class="profile-wrapper">
+      <a href="employeedashboard.html" class="profile-icon" id="profileToggle">
+        <img src="/Profile/MEw.jpg" alt="Profile" />
       </a>
-          </nav>
-  </header>
+
+      <!-- Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="employeedashboard.html">Profile Settings</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="hero.html">Logout</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
 
   <h1 class="page-title">Browse Jobs by Category</h1>
 
@@ -268,6 +387,20 @@
 
     // Show all jobs by default
     filterJobs("all");
+    const profileIcon = document.querySelector(".profile-icon");
+  const dropdown = document.querySelector(".profile-dropdown");
+
+  profileIcon.addEventListener("click", (e) => {
+    e.preventDefault(); // stops instant redirect
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!profileIcon.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
   </script>
 
 </body>
