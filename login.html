@@ -169,7 +169,7 @@
     <h1>Login to CareerHatch</h1>
     <p>Safe, Verified Jobs. Built for You.</p>
 
-    <form action="/Jobseeking/employee/Landing.html" method="POST">
+<form action="index.html" method="GET">
       <div class="form-group">
         <label for="username">Username or Email</label>
         <input type="text" id="username" name="username" placeholder="e.g. johndoe@email.com" required>
@@ -193,7 +193,7 @@
       <button type="submit">Login</button>
 
       <div class="note">
-        Don't have an account? <a href="/Jobseeking/Login/Sign-up.html">Sign up here</a>
+        Don't have an account? <a href="sign-up.html">Sign up here</a>
       </div>
 
       <div class="note" style="margin-top: 8px;">
@@ -205,26 +205,12 @@
       &copy; 2025 CareerHatch. All rights reserved.
     </footer>
     <script>
-        document.querySelector("form").addEventListener("submit", function (e) {
-          e.preventDefault(); // Stop form from submitting normally
-      
-          const username = document.getElementById("username").value.trim();
-          const password = document.getElementById("password").value.trim();
-      
-          // Employee login
-          if (username === "user1" && password === "user1") {
-            window.location.href = "/Jobseeking/employee/Landing.html";
-          }
-          // Employer login
-          else if (username === "employeer1" && password === "employeer2") {
-            window.location.href = "/Jobseeking/Employeer/EmployerDashboard.html";
-          }
-          // Invalid login
-          else {
-            alert("Invalid username or password.");
-          }
-        });
-      </script>
+  function redirectToHome(event) {
+    event.preventDefault(); // stop real submit
+    window.location.href = "index.html";
+  }
+</script>
+
       
   </div>
 </body>
